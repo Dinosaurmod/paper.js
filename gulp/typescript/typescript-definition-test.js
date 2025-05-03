@@ -813,7 +813,7 @@ style.selectedColor;
 style.fontFamily;
 style.fontWeight;
 style.fontSize;
-style.fontStyle;
+//style.fontStyle;
 style.leading;
 style.justification;
 style.textDecoration;
@@ -890,7 +890,7 @@ textItem.fontWeight;
 textItem.fontSize;
 textItem.fontStyle;
 textItem.leading;
-textItem.justification;
+//textItem.justification;
 textItem.textDecoration;
 //
 // PointText
