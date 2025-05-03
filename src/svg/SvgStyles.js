@@ -36,7 +36,7 @@ var SvgStyles = Base.each({
     fontFamily: ['font-family', 'string'],
     fontWeight: ['font-weight', 'string', null, null, 'normal'],
     fontSize: ['font-size', 'number'],
-    fontStyle: ['font-style', 'string'],
+    // fontStyle: ['font-style', 'string'],
     justification: ['text-anchor', 'lookup', {
         left: 'start',
         center: 'middle',
@@ -46,6 +46,7 @@ var SvgStyles = Base.each({
         none: 'none',
         underline: 'underline'
     }, null, 'none'],
+    // textDecorationColor: ['text-decoration-color', 'color'],
     // Item
     opacity: ['opacity', 'number', null, null, 1],
     blendMode: ['mix-blend-mode', 'style', null, null, 'normal']

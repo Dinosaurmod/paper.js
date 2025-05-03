@@ -97,7 +97,8 @@ var Style = Base.extend(new function() {
         fontSize: 12,
         leading: null,
         // Paragraphs
-        justification: 'left'
+        justification: 'left',
+        textDecoration: 'none'
     }),
     // Defaults for TextItem (override default fillColor to black):
     textDefaults = Base.set({}, groupDefaults, {
@@ -115,7 +116,8 @@ var Style = Base.extend(new function() {
         fontSize: /*#=*/Change.GEOMETRY,
         font: /*#=*/Change.GEOMETRY, // deprecated, links to fontFamily
         leading: /*#=*/Change.GEOMETRY,
-        justification: /*#=*/Change.GEOMETRY
+        justification: /*#=*/Change.GEOMETRY,
+        textDecoration: /*#=*/Change.GEOMETRY
     },
     item = {
         // Enforce creation of beans, as bean getters have hidden parameters,
@@ -701,5 +703,16 @@ var Style = Base.extend(new function() {
      * @type String
      * @values 'left', 'right', 'center'
      * @default 'left'
+     */
+
+    /**
+     * {@grouptitle Paragraph Style}
+     *
+     * The text decoration of text paragraphs.
+     *
+     * @name Style#textDecoration
+     * @type String
+     * @values 'none', 'underline'
+     * @default 'none'
      */
 });

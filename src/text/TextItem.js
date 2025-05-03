@@ -156,6 +156,17 @@ var TextItem = Item.extend(/** @lends TextItem# */{
      */
 
     /**
+     * {@grouptitle Paragraph Style}
+     *
+     * The text decoration of text paragraphs.
+     *
+     * @name TextItem#textDecoration
+     * @type String
+     * @values 'none', 'underline'
+     * @default 'none'
+     */
+
+    /**
      * @bean
      * @private
      * @deprecated use {@link #style} instead.

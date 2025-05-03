@@ -107,7 +107,8 @@ test('PointText#clone()', function() {
     pointText.position = pointText.position.add(100);
     pointText.style = {
         fontFamily: 'serif',
-        fontSize: 20
+        fontSize: 20,
+        textDecoration: 'none'
     };
     pointText.justification = 'center';
     cloneAndCompare(pointText);
