@@ -131,6 +131,7 @@ var PointText = TextItem.extend(/** @lends PointText# */{
         var numLines = lines.length;
         var leading = style.getLeading();
         var justification = style.getJustification();
+        var textDecoration = style.getTextDecoration();
 
         // Create SVG dom element from text
         var svg = SvgElement.create('svg', {
@@ -154,6 +155,7 @@ var PointText = TextItem.extend(/** @lends PointText# */{
         element.style.visibility = ('hidden');
         element.style.whiteSpace = 'pre';
         element.style.fontSize = this.fontSize + 'px';
+        element.style.textDecoration = textDecoration;
         element.style.fontFamily = this.font;
         element.style.lineHeight = this.leading / this.fontSize;
 
