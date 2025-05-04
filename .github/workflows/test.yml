@@ -35,7 +35,7 @@ jobs:
             pkg-config build-essential g++ \
             libcairo2-dev libpango1.0-dev libssl-dev \
             libjpeg-dev libgif-dev
-            npm set progress=false
+          npm set progress=false
           which gulp || npm install -g gulp-cli  
       - name: Install NPM Dependencies
         run: npm ci
@@ -58,7 +58,7 @@ jobs:
           persist-credentials: false
       - name: Rebuild
         run: |
-          sudo apt install python2
+          sudo apt install python3
           npm install
           npm run translate
       - name: Upload built-dist
