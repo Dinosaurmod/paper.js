@@ -72,11 +72,11 @@ jobs:
         with:
           name: built-dist
           path: dist
-      - name: Upload built-media
+      - name: Upload built-examples
         uses: actions/upload-artifact@v4
         with:
-          name: built-media
-          path: media
+          name: built-examples
+          path: examples
       - name: Checkout to develop-builds
         uses: actions/checkout@v3
         with:
@@ -85,17 +85,17 @@ jobs:
       - name: Clear out things
         run: |
           rm -rf dist/*
-          rm -rf media/*
+          rm -rf examples/*
       - name: Download built-dist
         uses: actions/download-artifact@v4
         with:
           name: built-dist
           path: dist/
-      - name: Download built-media
+      - name: Download built-examples
         uses: actions/download-artifact@v4
         with:
-          name: built-media
-          path: media/
+          name: built-examples
+          path: examples/
       - name: Commit
         uses: EndBug/add-and-commit@v9.1.1
         with:
