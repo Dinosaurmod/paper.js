@@ -2,11 +2,10 @@ name: Test and Rebuild
 
 on:
   push:
-  pull_request:
-  workflow_dispatch:
-  push:
     branches:
       - develop
+  pull_request:
+  workflow_dispatch:
 
 jobs:
   test:
