@@ -888,9 +888,9 @@ textItem.content;
 textItem.fontFamily;
 textItem.fontWeight;
 textItem.fontSize;
-textItem.fontStyle;
+//textItem.fontStyle;
 textItem.leading;
-//textItem.justification;
+textItem.justification;
 textItem.textDecoration;
 //
 // PointText
