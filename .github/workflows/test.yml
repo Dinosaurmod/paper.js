@@ -37,11 +37,16 @@ jobs:
             libjpeg-dev libgif-dev
           npm set progress=false
           which gulp || npm install -g gulp-cli  
+          if grep -q '^openssl_conf' /etc/ssl/openssl.cnf; then
+            sudo sed -i 's/^openssl_conf/# openssl_conf/' /etc/ssl/openssl.cnf
+          else
+            echo -e '\n# PhantomJS fix\nopenssl_conf = openssl_init\n[openssl_init]\nproviders = provider_sect\n[provider_sect]\ndefault = default_sect\n[default_sect]\nactivate = 0' | sudo tee -a /etc/ssl/openssl.cnf > /dev/null
+          fi
       - name: Install NPM Dependencies
         run: npm ci
       - run: gulp jshint
       - run: gulp minify
-      # - run: gulp test
+      - run: gulp test
       - run: gulp zip
       - name: Upload built-dist
         uses: actions/upload-artifact@v4
