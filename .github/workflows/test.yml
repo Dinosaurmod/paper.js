@@ -43,6 +43,16 @@ jobs:
       - run: gulp minify
       # - run: gulp test
       - run: gulp zip
+      - name: Upload built-dist
+        uses: actions/upload-artifact@v4
+        with:
+          name: built-dist
+          path: dist
+      - name: Upload built-examples
+        uses: actions/upload-artifact@v4
+        with:
+          name: built-examples
+          path: examples
 
   rebuild:
     needs: test
@@ -67,16 +77,6 @@ jobs:
       - name: Rebuild
         run: |
           npm install
-      - name: Upload built-dist
-        uses: actions/upload-artifact@v4
-        with:
-          name: built-dist
-          path: dist
-      - name: Upload built-examples
-        uses: actions/upload-artifact@v4
-        with:
-          name: built-examples
-          path: examples
       - name: Checkout to develop-builds
         uses: actions/checkout@v3
         with:
