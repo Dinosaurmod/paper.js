@@ -1,7 +1,7 @@
 {
   "name": "dinosaurmod-paper",
   "version": "0.12.7",
-  "description": "paper.js fork",
+  "description": "TurboWarp paper.js fork",
   "license": "MIT",
   "homepage": "https://github.com/Dinosaurmod/paper.js",
   "main": "dist/paper-full.js",
