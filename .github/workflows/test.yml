@@ -1,11 +1,12 @@
-# Originally based on the scratchfoundation/paper.js deploy.yml, but
-# without the deployment steps and since has been modified more.
-
-name: Test
+name: Test and Rebuild
 
 on:
   push:
   pull_request:
+  workflow_dispatch:
+  push:
+    branches:
+      - develop
 
 jobs:
   test:
@@ -14,7 +15,7 @@ jobs:
       JVM_OPTS: -Xmx3200m
       JDK_JAVA_OPTIONS: --add-opens=java.base/java.lang=ALL-UNNAMED --add-opens=java.base/java.time=ALL-UNNAMED --add-exports java.base/sun.nio.ch=ALL-UNNAMED
     steps: 
-      - uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683
+      - uses: actions/checkout@v3
         with:
           persist-credentials: false
       - name: Setup Java
@@ -40,3 +41,62 @@ jobs:
       - run: gulp minify
       # - run: gulp test
       - run: gulp zip
+
+  rebuild:
+    needs: test
+    concurrency: ci-${{ github.ref }}  # Recommended if you intend to make multiple deployments in quick succession.
+    runs-on: ubuntu-22.04
+    steps:
+      - uses: actions/setup-node@v3
+        with:
+          node-version: 16
+      - name: Checkout
+        uses: actions/checkout@v3
+        with:
+          persist-credentials: false
+      - name: Rebuild
+        run: |
+          sudo apt install python2
+          npm install
+          npm run translate
+      - name: Upload built-dist
+        uses: actions/upload-artifact@v4
+        with:
+          name: built-dist
+          path: dist
+      - name: Upload built-media
+        uses: actions/upload-artifact@v4
+        with:
+          name: built-media
+          path: media
+      - name: Checkout to develop-builds
+        uses: actions/checkout@v3
+        with:
+          ref: develop-builds
+          token: ${{ secrets.T }}
+      - name: Clear out things
+        run: |
+          rm -rf dist/*
+          rm -rf media/*
+      - name: Download built-dist
+        uses: actions/download-artifact@v4
+        with:
+          name: built-dist
+          path: dist/
+      - name: Download built-media
+        uses: actions/download-artifact@v4
+        with:
+          name: built-media
+          path: media/
+      - name: Commit
+        uses: EndBug/add-and-commit@v9.1.1
+        with:
+          message: "Build"
+          committer_name: GitHub Actions
+          committer_email: actions@github.com
+      - name: Repository Dispatch
+        uses: peter-evans/repository-dispatch@v2.0.1
+        with:
+          token: ${{ secrets.T }}
+          event-type: update
+          repository: Dinosaurmod/dinosaurmod.github.io
