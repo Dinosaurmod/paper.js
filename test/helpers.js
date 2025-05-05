@@ -334,7 +334,7 @@ var compareItem = function(actual, expected, message, options, properties) {
                 'strokeColor', 'strokeCap', 'strokeJoin', 'dashArray',
                 'dashOffset', 'miterLimit'];
         if (expected instanceof TextItem)
-            styles.push('fontSize', 'font', 'leading', 'justification', 'textDecoration');
+            styles.push('fontSize', 'fontStyle', 'font', 'leading', 'justification', 'textDecoration');
         compareProperties(actual.style, expected.style, styles,
                 message + ' (#style)', options);
     }
