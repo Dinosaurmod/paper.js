@@ -86,7 +86,8 @@ var PointText = TextItem.extend(/** @lends PointText# */{
             hasStroke = style.hasStroke(),
             leading = style.getLeading(),
             shadowColor = ctx.shadowColor;
-        ctx.font = style.getFontStyle();
+            textDecoration = style.getTextDecoration();
+        ctx.font = style.getFullFontStyle();
         ctx.textAlign = style.getJustification();
         for (var i = 0, l = lines.length; i < l; i++) {
             // See Path._draw() for explanation about ctx.shadowColor
@@ -113,7 +114,7 @@ var PointText = TextItem.extend(/** @lends PointText# */{
             numLines = lines.length,
             justification = style.getJustification(),
             leading = style.getLeading(),
-            width = this.getView().getTextWidth(style.getFontStyle(), lines),
+            width = this.getView().getTextWidth(style.getFullFontStyle(), lines),
             x = 0;
         // Adjust for different justifications.
         if (justification !== 'left')
@@ -155,7 +156,7 @@ var PointText = TextItem.extend(/** @lends PointText# */{
         element.style.visibility = ('hidden');
         element.style.whiteSpace = 'pre';
         element.style.fontSize = this.fontSize + 'px';
-        element.style.textDecoration = textDecoration;
+        element.style.textDecoration = this.textDecoration;
         element.style.fontFamily = this.font;
         element.style.lineHeight = this.leading / this.fontSize;
 
@@ -183,7 +184,7 @@ var PointText = TextItem.extend(/** @lends PointText# */{
 
         // Adjust for different justifications.
         if (justification !== 'left') {
-            var eltWidth = this.getView().getTextWidth(style.getFontStyle(), lines);
+            var eltWidth = this.getView().getTextWidth(style.getFullFontStyle(), lines);
             x -= eltWidth / (justification === 'center' ? 2: 1);
         }
 

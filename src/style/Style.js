@@ -95,6 +95,7 @@ var Style = Base.extend(new function() {
         fontFamily: 'sans-serif',
         fontWeight: 'normal',
         fontSize: 12,
+        fontStyle: 'normal',
         leading: null,
         // Paragraphs
         justification: 'left',
@@ -114,6 +115,7 @@ var Style = Base.extend(new function() {
         fontFamily: /*#=*/Change.GEOMETRY,
         fontWeight: /*#=*/Change.GEOMETRY,
         fontSize: /*#=*/Change.GEOMETRY,
+        fontStyle: /*#=*/Change.GEOMETRY,
         font: /*#=*/Change.GEOMETRY, // deprecated, links to fontFamily
         leading: /*#=*/Change.GEOMETRY,
         justification: /*#=*/Change.GEOMETRY,
@@ -366,7 +368,7 @@ var Style = Base.extend(new function() {
 
     // Overrides
 
-    getFontStyle: function() {
+    getFullFontStyle: function() {
         var fontSize = this.getFontSize();
         // To prevent an obscure iOS 7 crash, we have to convert the size to a
         // string first before passing it to the regular expression.
@@ -374,7 +376,8 @@ var Style = Base.extend(new function() {
         // proving that the issue is not the regular expression itself, but
         // something deeper down in the optimizer:
         // `if (size === 0) size = 0;`
-        return this.getFontWeight()
+        return this.getFontStyle() 
+                + ' ' + this.getFontWeight() 
                 + ' ' + fontSize + (/[a-z]/i.test(fontSize + '') ? ' ' : 'px ')
                 + this.getFontFamily();
     },
@@ -663,6 +666,15 @@ var Style = Base.extend(new function() {
      * The font-weight to be used in text content.
      *
      * @name Style#fontWeight
+     * @type String|Number
+     * @default 'normal'
+     */
+
+    /**
+     *
+     * The font-weight to be used in text content.
+     *
+     * @name Style#fontStyle
      * @type String|Number
      * @default 'normal'
      */
