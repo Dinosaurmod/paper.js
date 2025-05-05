@@ -127,6 +127,14 @@ var TextItem = Item.extend(/** @lends TextItem# */{
      */
 
     /**
+     * The font style of text content.
+     *
+     * @name TextItem#fontStyle
+     * @type String
+     * @default 'normal'
+     */
+
+    /**
      *
      * The font-family to be used in text content, as one string.
      * @deprecated use {@link #fontFamily} instead.
