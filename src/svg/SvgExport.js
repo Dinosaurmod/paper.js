@@ -270,7 +270,6 @@ new function() {
         var node = SvgElement.create('text', getTransform(item._matrix, false),
                 formatter);
         node.setAttribute('font-size', item.fontSize);
-        node.setAttribute('font-style', item.fontStyle);
         node.setAttribute('xml:space', 'preserve');
         for (var i = 0; i < item._lines.length; i++) {
             // Scratch-specific: Use <tspan> for multiline text,

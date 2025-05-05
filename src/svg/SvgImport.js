@@ -320,7 +320,6 @@ new function() {
 
             // Scratch-specific: Do not use x/y attributes because they break multiline usage.
             var fontSize = parseFloat(node.getAttribute("font-size"));
-            var fontStyle = node.getAttribute("font-style");
             var alignmentBaseline = node.getAttribute("alignment-baseline");
             if (node.childElementCount === 0) {
                 var text = new PointText();
@@ -329,7 +328,6 @@ new function() {
                 // Scratch3 SVGs use <tspan> method for all text (below)
                 text.translate(0, text._style.getLeading());
                 if (!isNaN(fontSize)) text.setFontSize(fontSize);
-                if (!isNaN(fontStyle)) text.setFontStyle(fontStyle);
                 return text;
             } else {
                 // Scratch3 SVGs always use <tspan>'s for multiline string support.
