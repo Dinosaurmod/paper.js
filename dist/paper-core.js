@@ -9,7 +9,7 @@
  *
  * All rights reserved.
  *
- * Date: Sun May 4 22:31:18 2025 +0200
+ * Date: Mon May 5 15:30:06 2025 +0200
  *
  ***
  *
@@ -11583,7 +11583,7 @@ var PointText = TextItem.extend({
 			hasStroke = style.hasStroke(),
 			leading = style.getLeading(),
 			shadowColor = ctx.shadowColor;
-		ctx.font = style.getFontStyle();
+		ctx.font = style.getFullFontStyle();
 		ctx.textAlign = style.getJustification();
 		for (var i = 0, l = lines.length; i < l; i++) {
 			ctx.shadowColor = shadowColor;
@@ -11609,7 +11609,7 @@ var PointText = TextItem.extend({
 			numLines = lines.length,
 			justification = style.getJustification(),
 			leading = style.getLeading(),
-			width = this.getView().getTextWidth(style.getFontStyle(), lines),
+			width = this.getView().getTextWidth(style.getFullFontStyle(), lines),
 			x = 0;
 		if (justification !== 'left')
 			x -= width / (justification === 'center' ? 2: 1);
@@ -11624,7 +11624,6 @@ var PointText = TextItem.extend({
 		var numLines = lines.length;
 		var leading = style.getLeading();
 		var justification = style.getJustification();
-		var textDecoration = style.getTextDecoration();
 
 		var svg = SvgElement.create('svg', {
 					version: '1.1',
@@ -11646,8 +11645,8 @@ var PointText = TextItem.extend({
 		element.style.visibility = ('hidden');
 		element.style.whiteSpace = 'pre';
 		element.style.fontSize = this.fontSize + 'px';
-		element.style.textDecoration = textDecoration;
 		element.style.fontFamily = this.font;
+		element.style.fontStyle = this.fontStyle;
 		element.style.lineHeight = this.leading / this.fontSize;
 
 		var bbox;
@@ -11666,7 +11665,7 @@ var PointText = TextItem.extend({
 		var y = bbox.y - halfStrokeWidth;
 
 		if (justification !== 'left') {
-			var eltWidth = this.getView().getTextWidth(style.getFontStyle(), lines);
+			var eltWidth = this.getView().getTextWidth(style.getFullFontStyle(), lines);
 			x -= eltWidth / (justification === 'center' ? 2: 1);
 		}
 
@@ -12458,9 +12457,9 @@ var Style = Base.extend(new function() {
 		fontFamily: 'sans-serif',
 		fontWeight: 'normal',
 		fontSize: 12,
+		fontStyle: 'normal',
 		leading: null,
 		justification: 'left',
-		textDecoration: 'none'
 	}),
 	textDefaults = Base.set({}, groupDefaults, {
 		fillColor: new Color()
@@ -12474,10 +12473,10 @@ var Style = Base.extend(new function() {
 		fontFamily: 9,
 		fontWeight: 9,
 		fontSize: 9,
+		fontStyle: 9,
 		font: 9,
 		leading: 9,
 		justification: 9,
-		textDecoration: 9
 	},
 	item = {
 		beans: true
@@ -12660,9 +12659,10 @@ var Style = Base.extend(new function() {
 		return this._project._view;
 	},
 
-	getFontStyle: function() {
+	getFullFontStyle: function() {
 		var fontSize = this.getFontSize();
-		return this.getFontWeight()
+		return this.getFontStyle()
+				+ ' ' + this.getFontWeight()
 				+ ' ' + fontSize + (/[a-z]/i.test(fontSize + '') ? ' ' : 'px ')
 				+ this.getFontFamily();
 	},
@@ -14743,15 +14743,12 @@ var SvgStyles = Base.each({
 	fontFamily: ['font-family', 'string'],
 	fontWeight: ['font-weight', 'string', null, null, 'normal'],
 	fontSize: ['font-size', 'number'],
+	fontStyle: ['font-style', 'string'],
 	justification: ['text-anchor', 'lookup', {
 		left: 'start',
 		center: 'middle',
 		right: 'end'
 	}, null, 'left'],
-	textDecoration: ['text-decoration', 'lookup', {
-		none: 'none',
-		underline: 'underline'
-	}, null, 'none'],
 	opacity: ['opacity', 'number', null, null, 1],
 	blendMode: ['mix-blend-mode', 'style', null, null, 'normal']
 }, function(entry, key) {
@@ -15006,6 +15003,7 @@ new function() {
 		var node = SvgElement.create('text', getTransform(item._matrix, false),
 				formatter);
 		node.setAttribute('font-size', item.fontSize);
+		node.setAttribute('font-style', item.fontStyle);
 		node.setAttribute('xml:space', 'preserve');
 		for (var i = 0; i < item._lines.length; i++) {
 			var tspanNode = SvgElement.create('tspan', {
@@ -15423,12 +15421,14 @@ new function() {
 		text: function(node) {
 
 			var fontSize = parseFloat(node.getAttribute("font-size"));
+			var fontStyle = node.getAttribute("font-style");
 			var alignmentBaseline = node.getAttribute("alignment-baseline");
 			if (node.childElementCount === 0) {
 				var text = new PointText();
 				text.setContent(node.textContent.trim() || '');
 				text.translate(0, text._style.getLeading());
 				if (!isNaN(fontSize)) text.setFontSize(fontSize);
+				if (!isNaN(fontStyle)) text.setFontStyle(fontStyle);
 				return text;
 			} else {
 				var lines = [];

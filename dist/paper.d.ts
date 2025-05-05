@@ -9,7 +9,7 @@
  *
  * All rights reserved.
  *
- * Date: Sun May 4 22:31:18 2025 +0200
+ * Date: Mon May 5 15:30:06 2025 +0200
  *
  * This is an auto-generated type definition.
  */
@@ -6476,6 +6476,11 @@ declare namespace paper {
         fontWeight: string | number
 
         /** 
+         * The font-weight to be used in text content.
+         */
+        fontStyle: string | number
+
+        /** 
          * The font size of text content, as a number in pixels, or as a string with
          * optional units `'px'`, `'pt'` and `'em'`.
          */
@@ -6604,6 +6609,11 @@ declare namespace paper {
          * optional units `'px'`, `'pt'` and `'em'`.
          */
         fontSize: number | string
+
+        /** 
+         * The font style of text content.
+         */
+        fontStyle: string
 
         /** 
          * The text leading of text content.
