@@ -156,8 +156,9 @@ var PointText = TextItem.extend(/** @lends PointText# */{
         element.style.visibility = ('hidden');
         element.style.whiteSpace = 'pre';
         element.style.fontSize = this.fontSize + 'px';
-        element.style.textDecoration = this.textDecoration;
+        element.style.textDecoration = textDecoration;
         element.style.fontFamily = this.font;
+        element.style.fontStyle = this.fontStyle;
         element.style.lineHeight = this.leading / this.fontSize;
 
         // Measure bbox
