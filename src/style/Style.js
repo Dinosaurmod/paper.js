@@ -41,7 +41,8 @@
  *     fontWeight: 'bold',
  *     fontSize: 20,
  *     fillColor: 'red',
- *     justification: 'center'
+ *     justification: 'center',
+ *     textDecoration: 'none'
  * };
  *
  * @classexample {@paperscript} // Styling groups
@@ -99,7 +100,7 @@ var Style = Base.extend(new function() {
         leading: null,
         // Paragraphs
         justification: 'left',
-        textDecoration: 'none'
+        //textDecoration: 'none'
     }),
     // Defaults for TextItem (override default fillColor to black):
     textDefaults = Base.set({}, groupDefaults, {
@@ -119,7 +120,7 @@ var Style = Base.extend(new function() {
         font: /*#=*/Change.GEOMETRY, // deprecated, links to fontFamily
         leading: /*#=*/Change.GEOMETRY,
         justification: /*#=*/Change.GEOMETRY,
-        textDecoration: /*#=*/Change.GEOMETRY
+        //textDecoration: /*#=*/Change.GEOMETRY
     },
     item = {
         // Enforce creation of beans, as bean getters have hidden parameters,
