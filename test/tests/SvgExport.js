@@ -276,7 +276,7 @@ test('Root has no redundant styles', function() {
     var g = exported.childNodes[0];
 
     equals(g.tagName, 'g');
-    equals(g.attributes.length, 5);
+    equals(g.attributes.length, 6);
     equals(g.getAttribute('fill'), 'none');
     equals(g.getAttribute('stroke'), 'none');
     equals(g.getAttribute('stroke-miterlimit'), '10');
