@@ -9,7 +9,7 @@
  *
  * All rights reserved.
  *
- * Date: Mon May 5 15:30:06 2025 +0200
+ * Date: Mon Jul 14 19:45:03 2025 +0200
  *
  ***
  *
@@ -11645,6 +11645,7 @@ var PointText = TextItem.extend({
 		element.style.visibility = ('hidden');
 		element.style.whiteSpace = 'pre';
 		element.style.fontSize = this.fontSize + 'px';
+		element.style.textDecoration = this.textDecoration;
 		element.style.fontFamily = this.font;
 		element.style.fontStyle = this.fontStyle;
 		element.style.lineHeight = this.leading / this.fontSize;
@@ -12460,6 +12461,7 @@ var Style = Base.extend(new function() {
 		fontStyle: 'normal',
 		leading: null,
 		justification: 'left',
+		textDecoration: 'none'
 	}),
 	textDefaults = Base.set({}, groupDefaults, {
 		fillColor: new Color()
@@ -12477,6 +12479,7 @@ var Style = Base.extend(new function() {
 		font: 9,
 		leading: 9,
 		justification: 9,
+		textDecoration: 9
 	},
 	item = {
 		beans: true
@@ -14749,6 +14752,12 @@ var SvgStyles = Base.each({
 		center: 'middle',
 		right: 'end'
 	}, null, 'left'],
+	textDecoration: ['text-decoration', 'lookup', {
+		none: 'none',
+		underline: 'underline',
+		lineThrough: 'line-through',
+		overline: 'overline',
+	}, null, 'none'],
 	opacity: ['opacity', 'number', null, null, 1],
 	blendMode: ['mix-blend-mode', 'style', null, null, 'normal']
 }, function(entry, key) {
