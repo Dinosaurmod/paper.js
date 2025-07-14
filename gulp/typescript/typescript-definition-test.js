@@ -816,7 +816,7 @@ style.fontSize;
 style.fontStyle;
 style.leading;
 style.justification;
-//style.textDecoration;
+style.textDecoration;
 //
 // Color
 //
@@ -891,7 +891,7 @@ textItem.fontSize;
 textItem.fontStyle;
 textItem.leading;
 textItem.justification;
-//textItem.textDecoration;
+textItem.textDecoration;
 //
 // PointText
 //

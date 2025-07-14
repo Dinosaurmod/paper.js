@@ -42,10 +42,12 @@ var SvgStyles = Base.each({
         center: 'middle',
         right: 'end'
     }, null, 'left'],
-    /*textDecoration: ['text-decoration', 'lookup', {
+    textDecoration: ['text-decoration', 'lookup', {
         none: 'none',
-        underline: 'underline'
-    }, null, 'none'],*/
+        underline: 'underline',
+        lineThrough: 'line-through',
+        overline: 'overline',
+    }, null, 'none'],
     // textDecorationColor: ['text-decoration-color', 'color'],
     // Item
     opacity: ['opacity', 'number', null, null, 1],

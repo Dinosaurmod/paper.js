@@ -170,7 +170,7 @@ var TextItem = Item.extend(/** @lends TextItem# */{
      *
      * @name TextItem#textDecoration
      * @type String
-     * @values 'none', 'underline'
+     * @values 'none', 'underline', 'line-through', 'overline'
      * @default 'none'
      */
 
