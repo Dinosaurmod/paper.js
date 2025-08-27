@@ -9,7 +9,7 @@
  *
  * All rights reserved.
  *
- * Date: Mon Jul 14 19:45:03 2025 +0200
+ * Date: Wed Aug 27 09:59:55 2025 +0200
  *
  ***
  *
@@ -9993,6 +9993,7 @@ Path.inject({ statics: new function() {
 				rect = Rectangle.readNamed(args, 'rectangle'),
 				radius = Size.readNamed(args, 'radius', 0,
 						{ readNull: true }),
+				cornersToRound = args[3] || { topLeft: true, topRight: true, bottomLeft: true, bottomRight: true },
 				bl = rect.getBottomLeft(true),
 				tl = rect.getTopLeft(true),
 				tr = rect.getTopRight(true),
@@ -10011,16 +10012,39 @@ Path.inject({ statics: new function() {
 					ry = radius.height,
 					hx = rx * kappa,
 					hy = ry * kappa;
-				segments = [
-					new Segment(bl.add(rx, 0), null, [-hx, 0]),
-					new Segment(bl.subtract(0, ry), [0, hy]),
-					new Segment(tl.add(0, ry), null, [0, -hy]),
-					new Segment(tl.add(rx, 0), [-hx, 0], null),
-					new Segment(tr.subtract(rx, 0), null, [hx, 0]),
-					new Segment(tr.add(0, ry), [0, -hy], null),
-					new Segment(br.subtract(0, ry), null, [0, hy]),
-					new Segment(br.subtract(rx, 0), [hx, 0])
-				];
+				segments = [];
+				if (cornersToRound.bottomLeft) {
+					segments.push(
+						new Segment(bl.add(rx, 0), null, [-hx, 0]),
+						new Segment(bl.subtract(0, ry), [0, hy])
+					);
+				} else {
+					segments.push(new Segment(bl));
+				}
+				if (cornersToRound.topLeft) {
+					segments.push(
+						new Segment(tl.add(0, ry), null, [0, -hy]),
+						new Segment(tl.add(rx, 0), [-hx, 0], null)
+					);
+				} else {
+					segments.push(new Segment(tl));
+				}
+				if (cornersToRound.topRight) {
+					segments.push(
+						new Segment(tr.subtract(rx, 0), null, [hx, 0]),
+						new Segment(tr.add(0, ry), [0, -hy], null)
+					);
+				} else {
+					segments.push(new Segment(tr));
+				}
+				if (cornersToRound.bottomRight) {
+					segments.push(
+						new Segment(br.subtract(0, ry), null, [0, hy]),
+						new Segment(br.subtract(rx, 0), [hx, 0])
+					);
+				} else {
+					segments.push(new Segment(br));
+				}
 			}
 			return createPath(segments, true, args);
 		},
