@@ -9,7 +9,7 @@
  *
  * All rights reserved.
  *
- * Date: Thu Aug 28 13:35:23 2025 +0200
+ * Date: Thu Aug 28 13:55:09 2025 +0200
  *
  ***
  *
@@ -10016,7 +10016,8 @@ Path.inject({ statics: new function() {
 					hx = rx * kappa,
 					hy = ry * kappa;
 				segments = [];
-				if (cornersToRound.bottomLeft) {
+				console.log(cornersToRound);
+				if (!!cornersToRound.bottomLeft) {
 					segments.push(
 						new Segment(bl.add(rx, 0), null, [-hx, 0]),
 						new Segment(bl.subtract(0, ry), [0, hy])
@@ -10024,7 +10025,7 @@ Path.inject({ statics: new function() {
 				} else {
 					segments.push(new Segment(bl));
 				}
-				if (cornersToRound.topLeft) {
+				if (!!cornersToRound.topLeft) {
 					segments.push(
 						new Segment(tl.add(0, ry), null, [0, -hy]),
 						new Segment(tl.add(rx, 0), [-hx, 0], null)
@@ -10032,7 +10033,7 @@ Path.inject({ statics: new function() {
 				} else {
 					segments.push(new Segment(tl));
 				}
-				if (cornersToRound.topRight) {
+				if (!!cornersToRound.topRight) {
 					segments.push(
 						new Segment(tr.subtract(rx, 0), null, [hx, 0]),
 						new Segment(tr.add(0, ry), [0, -hy], null)
@@ -10040,7 +10041,7 @@ Path.inject({ statics: new function() {
 				} else {
 					segments.push(new Segment(tr));
 				}
-				if (cornersToRound.bottomRight) {
+				if (!!cornersToRound.bottomRight) {
 					segments.push(
 						new Segment(br.subtract(0, ry), null, [0, hy]),
 						new Segment(br.subtract(rx, 0), [hx, 0])
