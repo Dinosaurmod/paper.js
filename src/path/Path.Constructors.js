@@ -216,7 +216,7 @@ Path.inject({ statics: new function() {
                 rect = Rectangle.readNamed(args, 'rectangle'),
                 radius = Size.readNamed(args, 'radius', 0,
                         { readNull: true }),
-                cornersToRound = args[2] || { topLeft: true, topRight: true, bottomLeft: true, bottomRight: true },
+                cornersToRound = args[3] || { topLeft: true, topRight: true, bottomLeft: true, bottomRight: true },
                 bl = rect.getBottomLeft(true),
                 tl = rect.getTopLeft(true),
                 tr = rect.getTopRight(true),
@@ -236,7 +236,6 @@ Path.inject({ statics: new function() {
                     hx = rx * kappa,
                     hy = ry * kappa;
                 segments = [];
-                console.log(cornersToRound);
                 if (!!cornersToRound.bottomLeft) {
                     segments.push(
                         new Segment(bl.add(rx, 0), null, [-hx, 0]),
