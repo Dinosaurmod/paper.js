@@ -9,7 +9,7 @@
  *
  * All rights reserved.
  *
- * Date: Thu Aug 28 14:05:44 2025 +0200
+ * Date: Thu Aug 28 14:55:10 2025 +0200
  *
  ***
  *
@@ -9996,7 +9996,7 @@ Path.inject({ statics: new function() {
 				rect = Rectangle.readNamed(args, 'rectangle'),
 				radius = Size.readNamed(args, 'radius', 0,
 						{ readNull: true }),
-				cornersToRound = args[3] || { topLeft: true, topRight: true, bottomLeft: true, bottomRight: true },
+				cornersToRound = args[2] || { topLeft: true, topRight: true, bottomLeft: true, bottomRight: true },
 				bl = rect.getBottomLeft(true),
 				tl = rect.getTopLeft(true),
 				tr = rect.getTopRight(true),
