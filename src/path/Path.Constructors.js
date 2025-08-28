@@ -236,7 +236,7 @@ Path.inject({ statics: new function() {
                     hx = rx * kappa,
                     hy = ry * kappa;
                 segments = [];
-                console.log(cornersToRound)
+                console.log(cornersToRound);
                 if (!!cornersToRound.bottomLeft) {
                     segments.push(
                         new Segment(bl.add(rx, 0), null, [-hx, 0]),
